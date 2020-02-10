@@ -30,6 +30,12 @@ class RedirectModule extends Module implements ModuleInterface
     public $backendAppId;
 
     /**
+     * Overwrite this param if you frontend app id is different from default.
+     * @var string
+     */
+    public $frontendAppId;
+
+    /**
      * Domain name with protocol and without end slash.
      * Need for display image preview that load in @frontend location.
      * @var string
@@ -40,9 +46,10 @@ class RedirectModule extends Module implements ModuleInterface
     {
         /** @var BaseApp $app */
         $app = $this->module;
-        $this->_initLocalProperties($app);
-        $this->_registerTranslation($app);
-        $this->_registerClassesToDIContainer($app);
+        $this->initLocalProperties($app);
+        $this->registerTranslation($app);
+        $this->registerClassesToDIContainer($app);
+        $this->registerRules($app);
     }
 
     public static function getId(): string
@@ -67,10 +74,13 @@ class RedirectModule extends Module implements ModuleInterface
      * @param BaseApp $app
      * @throws InvalidArgumentException
      */
-    private function _initLocalProperties(BaseApp $app)
+    private function initLocalProperties(BaseApp $app)
     {
         if ($app instanceof WebApp && $app->id == $this->backendAppId) {
             $this->controllerNamespace = __NAMESPACE__ . '\controllers\backend';
+        }
+        if ($app instanceof WebApp && $app->id == $this->frontendAppId) {
+            $this->controllerNamespace = __NAMESPACE__ . '\controllers\frontend';
         }
         if ($app instanceof ConsoleApp) {
             array_push(
@@ -86,7 +96,7 @@ class RedirectModule extends Module implements ModuleInterface
         }
     }
 
-    private function _registerTranslation(BaseApp $app)
+    private function registerTranslation(BaseApp $app)
     {
         $app->i18n->translations[self::TRANSLATE] = [
             'class'          => 'yii\i18n\PhpMessageSource',
@@ -95,7 +105,18 @@ class RedirectModule extends Module implements ModuleInterface
         ];
     }
 
-    private function _registerClassesToDIContainer(BaseApp $app): void
+    private function registerClassesToDIContainer(BaseApp $app): void
     {
+    }
+
+    private function registerRules(BaseApp $app): void
+    {
+        if ($app instanceof WebApp && $app->id == $this->frontendAppId) {
+            $app->getUrlManager()->addRules([
+                [
+                    'class' => __NAMESPACE__ . '\components\UrlRule',
+                ],
+            ]);
+        }
     }
 }
