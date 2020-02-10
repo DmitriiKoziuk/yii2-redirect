@@ -14,7 +14,7 @@ use DmitriiKoziuk\yii2ModuleManager\ModuleManager;
 
 class RedirectModule extends Module implements ModuleInterface
 {
-    const ID = 'dk-file-manager';
+    const ID = 'dk-redirect';
 
     const TRANSLATE = self::ID;
 
@@ -91,7 +91,7 @@ class RedirectModule extends Module implements ModuleInterface
         $app->i18n->translations[self::TRANSLATE] = [
             'class'          => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en',
-            'basePath'       => '@DmitriiKoziuk/yii2FileManager/messages',
+            'basePath'       => '@DmitriiKoziuk/yii2Redirect/messages',
         ];
     }
 
