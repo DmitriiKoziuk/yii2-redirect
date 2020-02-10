@@ -11,7 +11,7 @@ class RedirectController extends Controller
     public function actionRedirect(RedirectEntity $redirectEntity): void
     {
         $s = 'ss';
-        Yii::$app->response->redirect($redirectEntity->to_url)->send();
+        Yii::$app->response->redirect($redirectEntity->to_url, 301)->send();
         return;
     }
 }
