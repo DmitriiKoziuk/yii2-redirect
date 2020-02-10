@@ -1,0 +1,34 @@
+{
+  "name": "dmitriikoziuk/yii2-redirect",
+  "description": "yii2 redirect manager extension",
+  "type": "yii2-extension",
+  "keywords": [
+    "yii2",
+    "extension",
+    "redirect manager"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dmitrii Koziuk",
+      "email": "dmitriikoziuk@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.3.0",
+    "yiisoft/yii2": "~2.0.0",
+    "dmitriikoziuk/yii2-base": "~0.3.0",
+    "dmitriikoziuk/yii2-module-manager": "~0.3.0",
+    "dmitriikoziuk/yii2-config-manager": "~0.3.0",
+    "dmitriikoziuk/yii2-web-backend-lock": "~0.1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "DmitriiKoziuk\\yii2Redirect\\": "src"
+    }
+  },
+  "extra": {
+    "bootstrap": "DmitriiKoziuk\\yii2Redirect\\Bootstrap"
+  }
+}
