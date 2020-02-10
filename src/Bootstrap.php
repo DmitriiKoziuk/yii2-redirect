@@ -33,6 +33,10 @@ final class Bootstrap implements BootstrapInterface
                         ConfigManagerModule::GENERAL_CONFIG_NAME,
                         'backendAppId'
                     ),
+                    'frontendAppId' => $configService->getValue(
+                        ConfigManagerModule::GENERAL_CONFIG_NAME,
+                        'frontendAppId'
+                    ),
                     'frontendDomainName' => $configService->getValue(
                         ConfigManagerModule::GENERAL_CONFIG_NAME,
                         'frontendDomainName'
