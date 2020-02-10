@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'from_url_hash')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'from_url')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'to_url')->textarea(['rows' => 6]) ?>
