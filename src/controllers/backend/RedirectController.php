@@ -66,8 +66,11 @@ class RedirectController extends Controller
     {
         $model = new RedirectEntity();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->from_url_hash]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->from_url_hash = md5($model->from_url);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->from_url_hash]);
+            }
         }
 
         return $this->render('create', [
@@ -86,8 +89,11 @@ class RedirectController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->from_url_hash]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->from_url_hash = md5($model->from_url);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->from_url_hash]);
+            }
         }
 
         return $this->render('update', [
